@@ -1,4 +1,7 @@
 import {
+  ADDADMIN_FAILURE,
+  ADDADMIN_REQUEST,
+  ADDADMIN_SUCCESS,
   USER_LOGIN_FAILURE,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -84,7 +87,8 @@ export const reducer = (state = initialState, { type, payload }) => {
         isAuth: false,
         isLoading: false,
         isError: false,
-        role:"",
+        role: "",
+        token: "",
         message: payload.message,
       };
     }
@@ -94,7 +98,28 @@ export const reducer = (state = initialState, { type, payload }) => {
         isAuth: false,
         isLoading: false,
         isError: true,
-        token: "",
+      };
+    }
+    case ADDADMIN_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+    case ADDADMIN_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: payload.message,
+      };
+    }
+    case ADDADMIN_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
       };
     }
     default: {

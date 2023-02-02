@@ -19,12 +19,12 @@ userrouter.post("/register", async (req, res) => {
         } else {
           const user = new Registermodel({ email, password: hash, name });
           await user.save();
-          res.send("Reg");
+          res.send({message:"Registered Succesfully"});
         }
       });
     }
   } catch (err) {
-    res.send(err);
+    res.send({message:err});
     console.log(err);
   }
 });
@@ -51,40 +51,39 @@ userrouter.post("/login", async (req, res) => {
             });
           }
         } else {
-          res.send("Email or Password is Wrong");
+          res.send({message:"Email or Password is Wrong"});
         }
       });
     } else {
-      res.send("Email or Password is Wrong");
+      res.send({message:"Plaese Register First"});
     }
   } catch (err) {
-    res.send(err);
+    res.send({message:err});
     console.log(err);
   }
 });
 // ---------------------Add Admin-------------------------
 userrouter.post("/addadmin", verifyRole, async (req, res) => {
- 
   const { name, email, password, role } = req.body;
   try {
-    const chectemail=await Registermodel.find({email})
+    const checkemail=await Registermodel.find({email})
 
-    if(chectemail.length>0){
+    if(checkemail.length>0){
       res.send({message:"You are alraedy registered"})
     }
     else{
        bcrypt.hash(password, 5, async (err, hash) => {
       if (err) {
-        console.log(err);
+        console.log("has",err);
       } else {
         const user = new Registermodel({ email, password: hash, name, role });
         await user.save();
-        res.send("Admin Added");
+        res.send({message:"Admin Added"});
       }
     });
     }
   } catch (err) {
-    res.send(err);
+    res.send({message:err});
     console.log(err);
   }
 });
@@ -94,7 +93,7 @@ userrouter.get("/logout", verifyToken, async (req, res) => {
   const user = Registermodel.findOne({ token });
   user.updateOne({ $unset: { token: 1 } }, (err) => {
     if (err) {
-      res.send({ err: err });
+      res.send({ message: err });
     } else {
       res.send({ message: `Logout Successfully` });
     }

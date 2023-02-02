@@ -18,7 +18,7 @@ import {
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { Signupuser } from "../Redux/AuthReducer/Action";
+import { AddAdmin, Signupuser } from "../Redux/AuthReducer/Action";
 const Signup = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.AuthReducer.role);
@@ -27,15 +27,29 @@ const Signup = () => {
   const [Password, setPassword] = useState("");
   const [Name, setName] = useState("");
   const [Role, setRole] = useState("user");
+  const token = useSelector((state) => state.AuthReducer.token);
   const register = () => {
     dispatch(
       Signupuser({
         email: Email,
         password: Password,
         name: Name,
-        role: Role,
       })
     );
+  };
+  const Addadmin = () => {
+    dispatch(
+      AddAdmin({
+          auth:token,
+    data:{
+        email: Email,
+        password: Password,
+        name: Name,
+        role:Role
+      }
+        
+    }));
+   
   };
   return (
     <Flex
@@ -109,6 +123,7 @@ const Signup = () => {
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
+              display={role==="user"||role!=="User"||role==="" ? "visible" : "none"}
                 loadingText="Submitting"
                 size="lg"
                 bg={"blue.400"}
@@ -116,9 +131,25 @@ const Signup = () => {
                 _hover={{
                   bg: "blue.500",
                 }}
+
               onClick={()=>{register()}}>
-                {role==="admin"||role==="Admin" ? "Add Admin" : "Sign up"}
+                Sign up
               </Button>
+
+              <Button
+              display={role==="admin"||role==="Admin" ? "visible" : "none"}
+              
+                loadingText="Submitting"
+                size="lg"
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+              onClick={()=>{Addadmin()}}>
+                Add Admin
+              </Button>
+
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>

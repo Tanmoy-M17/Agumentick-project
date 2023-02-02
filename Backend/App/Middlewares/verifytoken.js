@@ -3,7 +3,6 @@ const {Registermodel}=require("../models/register.model")
 
 const verifyRole = async(req, res, next) => {
   const token = req.headers.auth;
-
   if (token) {
     const decoded = jwt.verify(token, "masai");
     if (decoded) {
@@ -37,10 +36,10 @@ const verifyToken = (req, res, next) => {
     if (decoded) {
       next();
     } else {
-      res.send("Please Login First");
+      res.send({message:"Please Login First"});
     }
   } else {
-    res.send("Please Login First");
+    res.send({message:"Please Login First"});
   }
 };
 
