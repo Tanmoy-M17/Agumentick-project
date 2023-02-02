@@ -22,7 +22,6 @@ import { Signupuser } from "../Redux/AuthReducer/Action";
 const Signup = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.AuthReducer.role);
-  const Admin = role === "admin" || "Admin" ? true : false;
   const [showPassword, setShowPassword] = useState(false);
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -97,7 +96,7 @@ const Signup = () => {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <FormControl display={Admin ? "visible" : "none"}>
+            <FormControl display={role==="admin"||role==="Admin" ? "visible" : "none"}>
               <Select
                 placeholder="Select Role"
                 onChange={(e) => {
@@ -118,7 +117,7 @@ const Signup = () => {
                   bg: "blue.500",
                 }}
               onClick={()=>{register()}}>
-                {Admin ? "Add Admin" : "Sign up"}
+                {role==="admin"||role==="Admin" ? "Add Admin" : "Sign up"}
               </Button>
             </Stack>
             <Stack pt={6}>

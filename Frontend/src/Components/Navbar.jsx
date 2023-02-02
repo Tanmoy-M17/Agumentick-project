@@ -31,7 +31,6 @@ import {
     const { isOpen, onToggle } = useDisclosure();
     const role = useSelector((state) => state.AuthReducer.role);
   const Admin = role === "admin" || "Admin" ? true:false;
-  console.log(Admin)
 
   const logoutuser=()=>{
     dispatch(logout())
@@ -102,7 +101,7 @@ import {
           _hover={{
             bg: 'pink.300',
           }} onClick={()=>{navigate("/signup")}}>
-          {Admin ? "Add Admin" : "Sign up"}
+          {role==="admin"||role==="Admin" ? "Add Admin" : "Sign up"}
         </Button>
         <Button
          display={{ base: 'none', md: 'inline-flex' }}
