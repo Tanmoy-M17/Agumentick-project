@@ -30,10 +30,9 @@ import {
     const dispatch=useDispatch()
     const { isOpen, onToggle } = useDisclosure();
     const role = useSelector((state) => state.AuthReducer.role);
-  const Admin = role === "admin" || "Admin" ? true:false;
-
+    const token = useSelector((state) => state.AuthReducer.token);
   const logoutuser=()=>{
-    dispatch(logout())
+    dispatch(logout(token))
   }
 
   return (

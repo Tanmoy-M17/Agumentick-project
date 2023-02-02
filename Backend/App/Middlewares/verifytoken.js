@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const {Registermodel}=require("../models/register.model")
 
 const verifyRole = async(req, res, next) => {
-  const token = req.cookies.auth;
+  const token = req.headers.auth;
 
   if (token) {
     const decoded = jwt.verify(token, "masai");
@@ -30,7 +30,8 @@ const verifyRole = async(req, res, next) => {
 
 
 const verifyToken = (req, res, next) => {
-  const token = req.header.auth;
+  const token = req.headers.auth;
+  console.log(token)
   if (token) {
     const decoded = jwt.verify(token, "masai");
     if (decoded) {

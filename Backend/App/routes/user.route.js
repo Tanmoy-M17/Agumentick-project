@@ -30,6 +30,7 @@ userrouter.post("/register", async (req, res) => {
 });
 //--------------Login A user-------------------
 userrouter.post("/login", async (req, res) => {
+  console.log("login");
   const { email, password } = req.body;
   try {
     const user = await Registermodel.find({ email });
@@ -63,6 +64,7 @@ userrouter.post("/login", async (req, res) => {
 });
 // ---------------------Add Admin-------------------------
 userrouter.post("/addadmin", verifyRole, async (req, res) => {
+ 
   const { name, email, password, role } = req.body;
   try {
     const chectemail=await Registermodel.find({email})
@@ -88,7 +90,7 @@ userrouter.post("/addadmin", verifyRole, async (req, res) => {
 });
 // ------------------------Logout A user------------------------
 userrouter.get("/logout", verifyToken, async (req, res) => {
-  const token = req.header.auth;
+  const token = req.headers.auth;
   const user = Registermodel.findOne({ token });
   user.updateOne({ $unset: { token: 1 } }, (err) => {
     if (err) {
