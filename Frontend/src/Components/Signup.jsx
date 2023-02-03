@@ -123,7 +123,7 @@ const Signup = () => {
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
-              display={role==="user"||role!=="User"||role==="" ? "visible" : "none"}
+              display={role==="user"||role==="User"||role==="" ? "visible" : "none"}
                 loadingText="Submitting"
                 size="lg"
                 bg={"blue.400"}

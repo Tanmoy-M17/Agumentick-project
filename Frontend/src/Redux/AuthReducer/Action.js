@@ -24,7 +24,7 @@ export const login = (payload) => (dispatch) => {
     .then((r) => {
       dispatch({ type: USER_LOGIN_SUCCESS, payload: r.data });
     })
-    .catch((err) => dispatch({ type: USER_LOGIN_FAILURE }));
+    .catch((err) => dispatch({ type: USER_LOGIN_FAILURE,payload:err.response.data.message }));
 };
 
 export const Signupuser = (payload) => (dispatch) => {
@@ -49,7 +49,6 @@ export const logout = (payload) => (dispatch) => {
       },
     })
     .then((r) => {
-      console.log(r);
       dispatch({ type: USER_LOGOUT_SUCCESS, payload: r.data });
     })
     .catch((err) => dispatch({ type: USER_LOGOUT_FAILURE }));

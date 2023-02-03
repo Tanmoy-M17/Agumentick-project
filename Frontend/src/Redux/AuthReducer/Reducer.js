@@ -15,6 +15,7 @@ import {
 
 const initialState = {
   isAuth: false,
+  id:"",
   token: "",
   role: "",
   message: "",
@@ -60,18 +61,21 @@ export const reducer = (state = initialState, { type, payload }) => {
         isAuth: true,
         isLoading: false,
         isError: false,
+        id:payload.id,
         token: payload.token,
         role: payload.role,
         message: payload.message,
       };
     }
     case USER_LOGIN_FAILURE: {
+      console.log(payload);
       return {
         ...state,
         isAuth: false,
         isLoading: false,
         isError: true,
         token: "",
+        message:payload
       };
     }
     case USER_LOGOUT_REQUEST: {

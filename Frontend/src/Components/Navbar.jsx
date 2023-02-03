@@ -31,6 +31,7 @@ import {
     const { isOpen, onToggle } = useDisclosure();
     const role = useSelector((state) => state.AuthReducer.role);
     const token = useSelector((state) => state.AuthReducer.token);
+    const auth = useSelector((state) => state.AuthReducer.isAuth);
   const logoutuser=()=>{
     dispatch(logout(token))
   }
@@ -79,7 +80,8 @@ import {
         direction={'row'}
         spacing={6}>
         <Button
-         display={{ base: 'none', md: 'inline-flex' }}
+        display={!auth ? "visible" : "none"}
+        //  display={{ base: 'none', md: 'inline-flex' }}
          fontSize={'sm'}
          fontWeight={600}
          color={'white'}
@@ -103,7 +105,8 @@ import {
           {role==="admin"||role==="Admin" ? "Add Admin" : "Sign up"}
         </Button>
         <Button
-         display={{ base: 'none', md: 'inline-flex' }}
+        display={auth ? "visible" : "none"}
+        //  display={{ base: 'none', md: 'inline-flex' }}
          fontSize={'sm'}
          fontWeight={600}
          color={'white'}
