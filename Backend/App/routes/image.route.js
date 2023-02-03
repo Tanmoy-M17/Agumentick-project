@@ -36,3 +36,7 @@ imagerouter.patch("/updateimage/:id",verifyRole, async (req, res) => {
         res.status(404).send({message:err})
     }
   });
+
+  module.exports={
+    imagerouter
+  }

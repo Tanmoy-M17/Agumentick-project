@@ -18,7 +18,7 @@ export const login = (payload) => (dispatch) => {
   dispatch({ type: USER_LOGIN_REQUEST });
   return axios({
     method: "post",
-    url: "http://localhost:8080/user/login",
+    url: "https://cooperative-rose-sundress.cyclic.app/user/login",
     data: payload,
   })
     .then((r) => {
@@ -31,7 +31,7 @@ export const Signupuser = (payload) => (dispatch) => {
   dispatch({ type: USER_SIGNUP_REQUEST });
   return axios({
     method: "post",
-    url: "http://localhost:8080/user/register",
+    url: "https://cooperative-rose-sundress.cyclic.app/user/register",
     data: payload,
   })
     .then((r) => {
@@ -43,7 +43,7 @@ export const Signupuser = (payload) => (dispatch) => {
 export const logout = (payload) => (dispatch) => {
   dispatch({ type: USER_LOGOUT_REQUEST });
   return axios
-    .get("http://localhost:8080/user/logout", {
+    .get("https://cooperative-rose-sundress.cyclic.app/user/logout", {
       headers: {
         auth: payload,
       },
@@ -59,7 +59,7 @@ export const AddAdmin =
   (dispatch) => {
     dispatch({ type: ADDADMIN_REQUEST });
     return axios
-      .post("http://localhost:8080/user/addadmin", data, {
+      .post("https://cooperative-rose-sundress.cyclic.app/user/addadmin", data, {
         headers: {
           auth: auth,
         },

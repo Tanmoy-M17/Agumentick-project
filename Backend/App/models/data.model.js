@@ -7,12 +7,13 @@ const dataSchema=monggose.Schema({
     name:String,
     email:String,
     portfolio:String,
+    facebook:String,
     instagram:String,
     linkedin:String,
     twitter:String
 })
 
-const DataModel=mongoose.model(data,dataSchema);
+const DataModel=mongoose.model("data",dataSchema);
 
 module.exports={
     DataModel
